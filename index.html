@@ -54,7 +54,8 @@
       box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
       background: #2d5a3b;
     }
-    .festival-map {
+.festival-map {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -220,17 +221,17 @@
   <p class="subtitle">Сказочный фестиваль в Магнитогорске</p>
 
   <!-- ========== ИНТЕРАКТИВНАЯ СКАЗОЧНАЯ КАРТА ========== -->
-  <div class="festival-map" id="festivalMapPlaceholder">
-    <p style="color: #ffd700; font-size: 2rem; padding-top: 200px; font-family: 'Lobster', cursive;">
-      🌳 Карта фестиваля скоро появится 🌳
-    </p>
-  </div>
+<div class="festival-map" id="festivalMapPlaceholder">
 
-    <!-- Кнопки сцен (подгони координаты под свою картинку) -->
-    <div class="stage-btn" style="left: 25%; top: 40%;" data-stage="main">1</div>
-    <div class="stage-btn" style="left: 60%; top: 55%;" data-stage="leshy">2</div>
-    <div class="stage-btn" style="left: 45%; top: 75%;" data-stage="kikimora">3</div>
-  </div>
+  <p style="color: #ffd700; font-size: 2rem; padding-top: 200px; font-family: 'Lobster', cursive;">
+    🌳 Карта фестиваля скоро появится 🌳
+  </p>
+
+  <div class="stage-btn" style="left: 25%; top: 40%;" data-stage="main">1</div>
+  <div class="stage-btn" style="left: 60%; top: 55%;" data-stage="leshy">2</div>
+  <div class="stage-btn" style="left: 45%; top: 75%;" data-stage="kikimora">3</div>
+
+</div>
 
   <!-- МОДАЛЬНОЕ ОКНО -->
   <div class="modal" id="modal">
@@ -324,7 +325,7 @@
     // ======================
     // ⚠️ ВСТАВЬ СВОЙ API-КЛЮЧ НИЖЕ
     const map = new mapgl.Map('dgismap', {
-      center: [59.033, 53.383],   // долгота, широта центра парка
+      center: [58.59, 53.24],   // долгота, широта центра парка
       zoom: 16,
       key:  CONFIG.DGIS_API_KEY,       // КЛЮЧ
     });
@@ -340,12 +341,12 @@
       },
     });
 
-    entranceMarker.on('click', () => {
-      new mapgl.Popup(map, {
-        coordinates: entranceCoords,
-        html: '<b>Парк «Лукоморье»</b><br>Добро пожаловать на фестиваль!',
-      });
+  entranceMarker.on('click', () => {
+    const popup = new mapgl.Popup(map, {
+      coordinates: entranceCoords,
+      html: '<b>Парк «Лукоморье»</b><br>Добро пожаловать на фестиваль!'
     });
+  });
 
     // Сцены на реальной карте (связываем с ID из stagesData)
     const stagesOnRealMap = [
